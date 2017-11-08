@@ -48,11 +48,12 @@ public class LogTable extends JTable implements IMessageEditorController {
         this.requestViewer = BurpExtender.callbacks.createMessageEditor(this, false);
         this.responseViewer = BurpExtender.callbacks.createMessageEditor(this, false);
         setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
-        getColumnModel().getColumn(0).setMinWidth(100);
-        getColumnModel().getColumn(1).setPreferredWidth(1000);
-        getColumnModel().getColumn(2).setMinWidth(100);
-        getColumnModel().getColumn(3).setMinWidth(150);
-        getColumnModel().getColumn(4).setMinWidth(100);
+        getColumnModel().getColumn(0).setMinWidth(200);
+        getColumnModel().getColumn(1).setMinWidth(100);
+        getColumnModel().getColumn(2).setPreferredWidth(1000);
+        getColumnModel().getColumn(3).setMinWidth(100);
+        getColumnModel().getColumn(4).setMinWidth(150);
+        getColumnModel().getColumn(5).setMinWidth(100);
         setAutoCreateRowSorter(true);
     }
 
@@ -77,7 +78,7 @@ public class LogTable extends JTable implements IMessageEditorController {
     @Override
     public void changeSelection(int row, int col, boolean toggle, boolean extend) {
         // show the log entry for the selected row
-        Log logEntry = logTableModel.getLogArray().get(row);
+        Log logEntry = logTableModel.getLogArray().get(convertRowIndexToModel(row));
         requestViewer.setMessage(logEntry.requestResponse.getRequest(), true);
         responseViewer.setMessage(logEntry.requestResponse.getResponse(), false);
         currentlyDisplayedItem = logEntry.requestResponse;
